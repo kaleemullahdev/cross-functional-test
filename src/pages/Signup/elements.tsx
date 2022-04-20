@@ -1,6 +1,5 @@
 import Button, { ButtonProps } from "@mui/material/Button";
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
 import PhoneInput, { PhoneInputProps } from "react-phone-input-2";
 
 export const StyledButton = styled(Button)<ButtonProps & { bgcolor?: string }>`
@@ -11,10 +10,6 @@ export const StyledButton = styled(Button)<ButtonProps & { bgcolor?: string }>`
   :hover {
     background-color: #01e0b1;
   }
-`;
-
-export const StyledLink = styled(Link)`
-  text-decoration: none;
 `;
 
 export const StyledPhoneInput = styled(PhoneInput)<
