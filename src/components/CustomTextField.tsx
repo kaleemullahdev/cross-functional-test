@@ -1,28 +1,48 @@
-import TextField, { TextFieldProps } from "@mui/material/TextField";
-import styled from "@emotion/styled";
+import { TextFieldProps } from "@mui/material/TextField";
+import { Controller, Control, FieldValues } from "react-hook-form";
+import { StyledTextField } from "./elements";
 
-const StyledTextField = styled(TextField)`
-  label {
-    color: #d1d1d1;
-  }
-  label.Mui-focused {
-    color: #67ecd0;
-  }
-  .MuiFilledInput-input {
-    background: white;
-    border: 1px solid #d1d1d1;
-    border-radius: 2px;
-  }
-`;
+type Props = {
+  control: Control<FieldValues, object>;
+  fieldName: string;
+  error?: { message: string };
+  defaultValue?: string;
+  placeholder?: string;
+  textParser?: (value: string) => string;
+};
 
-export const CustomTextField: React.FC<TextFieldProps> = (props) => {
+export const CustomTextField: React.FC<Props & TextFieldProps> = ({
+  control,
+  fieldName,
+  defaultValue = "",
+  error,
+  textParser,
+  ...props
+}) => {
+  const isError = error?.message;
   return (
-    <StyledTextField
-      InputProps={{
-        disableUnderline: true,
-      }}
-      variant="filled"
-      {...props}
+    <Controller
+      name={fieldName}
+      defaultValue={defaultValue}
+      control={control}
+      render={({ field: { onChange, ...field } }) => (
+        <>
+          <StyledTextField
+            InputProps={{
+              disableUnderline: true,
+            }}
+            variant="filled"
+            onChange={(e) => {
+              const value = e.target.value;
+              onChange(textParser ? textParser(value) : value);
+            }}
+            {...field}
+            error={Boolean(isError)}
+            helperText={isError}
+            {...props}
+          />
+        </>
+      )}
     />
   );
 };
