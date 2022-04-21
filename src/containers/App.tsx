@@ -9,7 +9,10 @@ const App: React.FC = () => {
         <Header />
         <Routes>
           <Route path="/" element={<SignupForm />} />
-          <Route path="detail" element={<AccountRequestConfirmation />} />
+          <Route
+            path="request-confirmation"
+            element={<AccountRequestConfirmation />}
+          />
         </Routes>
       </Container>
     </div>
