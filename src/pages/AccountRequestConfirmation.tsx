@@ -21,6 +21,11 @@ type Location = {
 export const AccountRequestConfirmation = () => {
   // beacuse useLocation is not accepting any generic type so to disable typescript I've to use as keywork but it is not the recommended way to deal with typesciprt.
   const { state } = useLocation() as Location;
+
+  const phoneNumber_ = `(${state?.phoneNumber.slice(
+    0,
+    3
+  )}) ${state?.phoneNumber.slice(3, 6)}-${state?.phoneNumber.slice(6, 10)}`;
   return (
     <Box>
       <Grid container spacing={4} alignItems="center">
@@ -39,8 +44,8 @@ export const AccountRequestConfirmation = () => {
       <Box mt={3}>
         <Typhography variant="body2" fontWeight="lighter" align="left">
           We'll process your application as soon as possible and send you a
-          decision within 30 days to {state?.phoneNumber} or {state?.email}. We
-          will contact you in case more information is needed.
+          decision within 30 days to {phoneNumber_} or {state?.email}. We will
+          contact you in case more information is needed.
         </Typhography>
       </Box>
       <Box mt={2}>

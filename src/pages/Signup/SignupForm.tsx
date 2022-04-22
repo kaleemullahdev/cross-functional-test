@@ -5,6 +5,7 @@ import { StyledButton, StyledPhoneInput } from "./elements";
 import { CustomTextField, AlertMessage } from "../../components";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CircularProgress from "@mui/material/CircularProgress";
+import FormHelperText from "@mui/material/FormHelperText";
 import { AlertColor } from "@mui/material/Alert";
 import { useForm, Controller, FieldValues } from "react-hook-form";
 import * as yup from "yup";
@@ -51,6 +52,7 @@ export const SignupForm: React.FC = () => {
     type: "",
     message: "",
   });
+  const navigate = useNavigate();
 
   const {
     control,
@@ -61,20 +63,6 @@ export const SignupForm: React.FC = () => {
     mode: "onChange",
     reValidateMode: "onChange",
   });
-
-  const navigate = useNavigate();
-
-  const { firstName, lastName, email, phoneNumber, password } = errors;
-
-  const phoneInputStyle = {
-    width: "100%",
-    border: `1px solid ${
-      Boolean(phoneNumber?.message) ? "#d32f2f" : "#d1d1d1"
-    }`,
-    borderRadius: "2px",
-    boxShadow: "none",
-  };
-
   const onSubmit = (formValues: FieldValues) => {
     setLoading(true);
     axios
@@ -115,7 +103,6 @@ export const SignupForm: React.FC = () => {
         console.log("err", err);
       });
   };
-  const { type, message } = responseMessage;
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -127,6 +114,17 @@ export const SignupForm: React.FC = () => {
 
     setShowSnackBar(false);
   };
+
+  const { firstName, lastName, email, phoneNumber, password } = errors;
+  const phoneInputStyle = {
+    width: "100%",
+    border: `1px solid ${
+      Boolean(phoneNumber?.message) ? "#d32f2f" : "#d1d1d1"
+    }`,
+    borderRadius: "2px",
+    boxShadow: "none",
+  };
+  const { type, message } = responseMessage;
   return (
     <>
       <AlertMessage
@@ -173,6 +171,14 @@ export const SignupForm: React.FC = () => {
                 />
               )}
             />
+            {phoneNumber && (
+              <FormHelperText
+                sx={{ marginLeft: "14px", marginRight: "14px" }}
+                error={Boolean(phoneNumber)}
+              >
+                Required*
+              </FormHelperText>
+            )}
           </Grid>
           <Grid item xs={12}>
             <CustomTextField
