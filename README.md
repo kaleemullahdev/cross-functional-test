@@ -6,6 +6,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `yarn`
+
+Install the all package dependecies
+
+### `docker build . -t cross-functional-test`
+
+To build the docker container
+
+### `docker run -p 3000:3000 cross-functional-test`
+
+To run the project
+
 ### `yarn dev`
 
 Runs the app in the development mode.\

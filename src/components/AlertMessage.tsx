@@ -1,6 +1,6 @@
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps, AlertColor } from "@mui/material/Alert";
-import { useState, forwardRef } from "react";
+import { forwardRef } from "react";
 
 type Props = {
   showSnackBar: boolean;

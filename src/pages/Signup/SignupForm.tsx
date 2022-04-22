@@ -1,12 +1,11 @@
-import { useState, forwardRef } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import { StyledButton, StyledPhoneInput } from "./elements";
 import { CustomTextField, AlertMessage } from "../../components";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CircularProgress from "@mui/material/CircularProgress";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert, { AlertProps, AlertColor } from "@mui/material/Alert";
+import { AlertColor } from "@mui/material/Alert";
 import { useForm, Controller, FieldValues } from "react-hook-form";
 import * as yup from "yup";
 import "react-phone-input-2/lib/material.css";
@@ -214,10 +213,3 @@ export const SignupForm: React.FC = () => {
     </>
   );
 };
-
-const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
